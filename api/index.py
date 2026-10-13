@@ -7,6 +7,21 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from llama_cpp import Llama
+from uvicorn import run
+
+parser = ArgumentParser(description="Magi LLM Council")
+
+parser.add_argument("--gguf", type=Path, help="Path to a gguf file")
+args = parser.parse_args()
+target_path = args.gguf
+
+if target_path.exists():
+    if target_path.is_dir():
+        raise RuntimeError(f"Given path {target_path} does not lead to a file.")
+    if str(target_path).split(".")[-1] != "gguf":
+        raise RuntimeError(f"Given path {target_path} does not lead to a gguf file.")
+else:
+    raise RuntimeError(f"Given path {target_path} does not exists.")
 
 app = FastAPI(docs_url="/api/docs", openapi_url="/api/openapi.json")
 
@@ -17,21 +32,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-parser = ArgumentParser(description="Magi LLM Council")
-
-parser.add_argument("gguf_path", type=Path, help="Path to a gguf file")
-args = parser.parse_args()
-target_path = args.gguf_path
-
-if target_path.exists():
-    if target_path.is_dir():
-        raise RuntimeError(f"Given path {target_path} does not lead to a file.")
-    if str(target_path).split(".")[-1] != "gguf":
-        raise RuntimeError(f"Given path {target_path} does not lead to a gguf file.")
-else:
-    raise RuntimeError(f"Given path {target_path} does not exists.")
 
 MODEL_PATH: PosixPath = target_path
 llm = Llama(model_path=str(MODEL_PATH), n_ctx=4096, n_threads=4, n_gpu_layers=0)
@@ -107,3 +107,7 @@ async def chat_stream(request: Request):
                 yield f"data: {dumps({'sender': 'system', 'text': token})}\n\n"
 
     return StreamingResponse(event_generator(), media_type="text/event-stream")
+
+
+if __name__ == "__main__":
+    run("index:app", host="127.0.0.1", port=8000, reload=True)

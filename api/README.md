@@ -6,5 +6,5 @@
 
 ## Run dev
 
-`uv run python -m fastapi dev index.py`
+`uv run python index.py [path to gguf file]`
 

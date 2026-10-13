@@ -1,0 +1,49 @@
+@layer components {
+
+  .ascii-box-double {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    background-color: #000000;
+
+    border-style: double;
+    border-width: 6px;
+    border-color: currentColor;
+
+    box-shadow:
+      0 0 15px currentColor,
+      inset 0 0 10px rgba(255, 255, 255, 0.1);
+
+    text-shadow: 0 0 4px currentColor;
+    padding: 1rem;
+    width: 20rem;
+  }
+
+  .ascii-box-double p {
+    text-shadow: none !important;
+    opacity: 0.85;
+  }
+
+  .ascii-box-header {
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 2px dashed currentColor;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  .ascii-red {
+    color: #ef4444;
+  }
+
+  .ascii-red p {
+    color: #fca5a5;
+  }
+
+  .ascii-blue {
+    color: #3b82f6;
+  }
+
+  .ascii-blue p {
+    color: #93c5fd;
+  }
+}

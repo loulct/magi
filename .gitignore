@@ -1,5 +1,18 @@
+<<<<<<< HEAD
 # python
 .venv/
+# python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# virtual environments
+.venv/
+
+# tools
 .ropeproject/
 .ruff_cache/
 
@@ -42,3 +55,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+

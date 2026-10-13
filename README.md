@@ -1,9 +1,16 @@
-# MAGI
+# Magi
 
-## Setup
+## API
 
-`uv sync`
+cf. `./api/README.md`
 
-## Run dev
+## FrontEnd
 
-`uv run src/magi [path to gguf file]`
+### Setup
+
+`npm i`
+
+### Run dev
+
+`npm run dev`
+

@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+
+@import "./styles/chat.css";
+
+@layer base {
+  body {
+    background-color: #050200;
+    color: #ff6600;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(rgba(255, 102, 0, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 102, 0, 0.04) 1px, transparent 1px);
+    background-size: 4px 4px;
+
+    z-index: -1;
+    pointer-events: none;
+  }
+}
+
+@layer components {
+  .magi-brain {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    background-color: rgba(10, 5, 0, 0.85);
+    border: 3px solid #ff6600;
+    box-shadow: 0 0 15px rgba(255, 102, 0, 0.3), inset 0 0 10px rgba(255, 102, 0, 0.2);
+    padding: 1.25rem;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .magi-approved {
+    border-color: #ff6600;
+    color: #ff6600;
+  }
+
+  .magi-denied {
+    border-color: #ff0033;
+    color: #ff0033;
+    box-shadow: 0 0 15px rgba(255, 0, 51, 0.4), inset 0 0 10px rgba(255, 0, 51, 0.2);
+    animation: magi-alert-pulse 2s infinite ease-in-out;
+  }
+
+  .magi-header {
+    font-weight: 900;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    border-bottom: 2px dashed currentColor;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+}
+
+@keyframes magi-alert-pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
